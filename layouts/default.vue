@@ -1,0 +1,63 @@
+<template>
+  <div class="container">
+    <el-row class="header"></el-row>
+    <el-row class="content">
+      <nuxt/>
+    </el-row>
+  </div>
+</template>
+
+<script>
+import MyFooter from '../components/Footer.vue'
+
+export default {
+  components: {
+    MyFooter
+  }
+}
+</script>
+
+<style scoped>
+.header {
+  height: 70px;
+  background-image: url(../assets/img/tb_title_jrj.png);
+}
+.content{
+  height: calc(90vh);
+}
+.container
+{
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  height: 100%;
+  width: 100%;
+  background-image: url(../assets/img/tb_bg.png);
+}
+
+.button, .button:visited
+{
+  display: inline-block;
+  color: #3B8070;
+  letter-spacing: 1px;
+  background-color: #fff;
+  border: 2px solid #3B8070;
+  text-decoration: none;
+  text-transform: uppercase;
+  padding: 15px 45px;
+}
+
+.button:hover, .button:focus
+{
+  color: #fff;
+  background-color: #3B8070;
+}
+
+.title
+{
+  color: #505153;
+  font-weight: 300;
+  font-size: 2.5em;
+  margin: 0;
+}
+</style>
