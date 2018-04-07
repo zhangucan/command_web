@@ -1,20 +1,22 @@
 .el-card {
   border: 1px solid #3d4d81;
   background-color: rgba(0, 0, 0, .0);
-  height: calc((100vh-70px)/5);
+  //  calc((100vh-70px)/5*0.67)
+  height:16vh;
   margin: 8px 8px 0 8px;
 }
 .header {
 color: #303133;
 border-bottom: 1px solid #3d4d81;
-height: calc((100vh-70px)/5*0.15);
+height: 3vh;
 }
 .content {
 color: #f0f2f7;
-height: calc((100vh-70px)/5*0.67);
+//  calc((100vh-70px)/5*0.67)
+height: 8.2vh;
 border-style: solid;
-border-width: 14px;
-margin: 3px;
+border-width: 2vh;
+margin: .5vh;
 background: rgba(13, 30, 62, .7);
 border-image-source: url(../img/border.png);
 border-image-slice: 14;
@@ -24,6 +26,5 @@ border-image-repeat: initial;
 }
 .echarts {
   width: 100%;
-  min-width: 0;
-  height: 17.5vh;
+  height: 10vh;
 }

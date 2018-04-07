@@ -6,7 +6,8 @@ import getters from './getters'
 const createStore = () => {
   return new Vuex.Store({
     state: {
-      fallBarCard: {}
+      fallBarCard: {},
+      layout: {}
     },
     getters,
     actions,

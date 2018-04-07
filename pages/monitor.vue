@@ -1,38 +1,34 @@
 <template>
-    <el-row :gutter=20>
-      <el-col :span="5">
-        <el-row>
-          <el-col>
-            <bar-card></bar-card>
-          </el-col>
-        </el-row>
-      </el-col>
-      <el-col :span="14">
-        <el-row><map-card></map-card></el-row>
-      </el-col>
-      <el-col :span="5">
-        <el-row>
-          <el-col>
-            <fall-card></fall-card>
-          </el-col>
-        </el-row>
-      </el-col>
-    </el-row>
+  <div>
+    <map-card></map-card>
+  </div>
 </template>
 <script>
-import mapCard from '../components/views/cards/mapCard'
-import barCard from '../components/views/cards/barCard'
-import fallCard from '../components/views/cards/fallBarCard'
-
+import { mapState } from 'vuex'
 export default {
-  components: {
-    mapCard,
-    barCard,
-    fallCard
+  computed: {
+    ...mapState({
+      layout: 'layout'
+    })
+  },
+  watch: {
+    layout(val) {
+      console.log(val)
+    }
+  },
+  methods: {
+    item() {
+      console.log(this.$store.state.layout)
+    }
   },
   data() {
     return {
     }
+  },
+  created() {
+  },
+  beforeCreate() {
+    this.$store.dispatch('fillComponents')
   }
 }
 </script>

@@ -1,33 +1,32 @@
-export async function fallBarData(data) {
-  let option = {}
-  let targetDate = ''
-  let tempArr = []
-  var myDate = new Date()
-  var year = myDate.getFullYear()
-  var mouth = myDate.getMonth() + 1
-  console.log(data)
-  for (let i = 0; i < data.period; i++) {
-    option.legend.data.push(mouth + '月')
-    if (mouth < 10) {
-      targetDate = year + '-0' + mouth
-    } else {
-      targetDate = year + '-' + mouth
+export function fallBarData(data) {
+  let result = data.data.sort((a, b) => {
+    return Date.parse(a.dataDate) - Date.parse(b.dataDate)
+  }).slice(0, 6)
+  let dataIn = new Array(6).fill('-')
+  let dataOut = new Array(6).fill('-')
+  let dataAll = []
+  let category = []
+  result.reduce((total, currentValue, index) => {
+    category.push(currentValue.dataDate)
+    if (currentValue.dataType === '流入') {
+      dataAll.push(total)
+      dataIn[index] = currentValue.dataVal
+      total += currentValue.dataVal
+      return total
+    } else if (currentValue.dataType === '流出') {
+      total -= currentValue.dataVal
+      dataOut[index] = currentValue.dataVal
+      dataAll.push(total)
+      return total
     }
-    var resultInfo = data.filter(function (item) {
-      return targetDate === item.dataDate
-    }).forEach(function (item) {
-      tempArr.push(item)
-    })
-    if (--mouth === 0) { mouth = 12; year-- }
-  }
-  data.map(function (item) {
-
+  }, 0)
+  let minVal = Math.min(...dataAll)
+  dataAll.forEach((item, index) => {
+    dataAll[index] = item + Math.abs(minVal)
   })
   return {
     title: {
-      text: '阶梯瀑布图',
-      subtext: 'From ExcelHome',
-      sublink: 'http://e.weibo.com/1341556070/Aj1J2x5a5'
+      show: false
     },
     tooltip: {
       trigger: 'axis',
@@ -44,8 +43,71 @@ export async function fallBarData(data) {
         return tar.name + '<br/>' + tar.seriesName + ' : ' + tar.value
       }
     },
+    grid: {
+      left: 0,
+      right: 0,
+      bottom: 0,
+      top: 0,
+      containLabel: true
+    },
     legend: {
-      data: ['支出', '收入']
-    }
+      show: false
+    },
+    xAxis: {
+      type: 'category',
+      spliteLine: {
+        show: true,
+        lineStyle: {
+          color: ['#000']
+        }
+      },
+      data: category
+    },
+    yAxis: {
+      type: 'value',
+      splitLine: {show: false}
+    },
+    series: [
+      {
+        name: '辅助',
+        type: 'bar',
+        stack: '总量',
+        itemStyle: {
+          normal: {
+            barBorderColor: 'rgba(0,0,0,0)',
+            color: 'rgba(0,0,0,0)'
+          },
+          emphasis: {
+            barBorderColor: 'rgba(0,0,0,0)',
+            color: 'rgba(0,0,0,0)'
+          }
+        },
+        data: dataAll
+      },
+      {
+        name: '流入',
+        type: 'bar',
+        stack: '总量',
+        label: {
+          normal: {
+            show: true,
+            position: 'top'
+          }
+        },
+        data: dataIn
+      },
+      {
+        name: '流出',
+        type: 'bar',
+        stack: '总量',
+        label: {
+          normal: {
+            show: true,
+            position: 'bottom'
+          }
+        },
+        data: dataOut
+      }
+    ]
   }
 }

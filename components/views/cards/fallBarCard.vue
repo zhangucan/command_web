@@ -2,7 +2,11 @@
   <el-card :body-style="{ padding: '0px' }">
     <div class="header"></div>
     <div class="content">
-      <chart :option="fallBarCard"></chart>
+      <chart :options="fallBarCard"
+          :width = 'chartWidth'
+          ref="fallBarCard"
+          theme="ovilia-green"
+          auto-resize />
     </div>
   </el-card>
 </template>
@@ -16,7 +20,10 @@ export default{
   computed: {
     ...mapState({
       fallBarCard: 'fallBarCard'
-    })
+    }),
+    chartWidth() {
+      return 300
+    }
   },
   beforeCreate() {
     this.$store.dispatch('getFallBarData')

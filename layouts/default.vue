@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <el-row class="header"></el-row>
-    <el-row class="content">
+    <div class="header"></div>
+    <div class="content">
       <nuxt/>
-    </el-row>
+    </div>
   </div>
 </template>
 
@@ -19,45 +19,30 @@ export default {
 
 <style scoped>
 .header {
-  height: 70px;
-  background-image: url(../assets/img/tb_title_jrj.png);
+  width: 100%;
+  height: 10%;
+  background-image: url(../assets/img/header.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: inherit;
+  z-index: 1;
 }
 .content{
-  height: calc(90vh);
+  width: 100%;
+  height: 100%;
+  position: inherit;
 }
-.container
-{
+.container{
   margin: 0;
   padding: 0;
   overflow: hidden;
-  height: 100%;
+  background-image: url(../assets/img/background.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
-  background-image: url(../assets/img/tb_bg.png);
-}
-
-.button, .button:visited
-{
-  display: inline-block;
-  color: #3B8070;
-  letter-spacing: 1px;
-  background-color: #fff;
-  border: 2px solid #3B8070;
-  text-decoration: none;
-  text-transform: uppercase;
-  padding: 15px 45px;
-}
-
-.button:hover, .button:focus
-{
-  color: #fff;
-  background-color: #3B8070;
-}
-
-.title
-{
-  color: #505153;
-  font-weight: 300;
-  font-size: 2.5em;
-  margin: 0;
+  height: 100%;
 }
 </style>
